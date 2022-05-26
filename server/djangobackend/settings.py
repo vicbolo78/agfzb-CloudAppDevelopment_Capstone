@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ['week10-nginx.apic.us-east.mybluemix.net']
+ALLOWED_HOSTS = ['viclo.apic.us-east.mybluemix.net']
 
 
 # Application definition
