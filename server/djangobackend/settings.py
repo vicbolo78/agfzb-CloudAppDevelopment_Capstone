@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ['viclo.apic.us-east.mybluemix.net']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
