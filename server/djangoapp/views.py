@@ -96,7 +96,7 @@ def registration_request(request):
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
     if request.method == "GET":
-        url = "https://viclo.apic.us-east.mybluemix.net/djangoapp/dealer-get"
+        url = "https://04ad6491.us-east.apigw.appdomain.cloud/api/getdealerships"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
@@ -112,7 +112,7 @@ def get_dealer_details(request, dealer_id):
     if request.method == "GET":
         url = 'https://viclo.apic.us-east.mybluemix.net/djangoapp/review'
         reviews =  get_dealer_reviews_from_cf(url, dealer_id)
-        url2 = "https://viclo.apic.us-east.mybluemix.net/djangoapp/dealership"
+        url2 = "https://04ad6491.us-east.apigw.appdomain.cloud/api/getdealerships"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url2)
         dealership = {}
@@ -145,7 +145,7 @@ def add_review(request, dealer_id):
                 review["car_make"] =car.model.name
             json_payload = {"review": review}
             print (review)
-            url = "https://viclo.apic.us-east.mybluemix.net/djangoapp/review"
+            url = "https://04ad6491.us-east.apigw.appdomain.cloud/api/postreviews"
             post_request(url, json_payload, dealerId=dealer_id)
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
         else: 
