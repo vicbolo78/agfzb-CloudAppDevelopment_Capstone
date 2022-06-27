@@ -99,9 +99,8 @@ def get_dealerships(request):
         context = {}
         url = "https://04ad6491.us-east.apigw.appdomain.cloud/api/getdealerships"
         # Get dealers from the URL
-        context["getdealerships_list"] = get_getdealerships_from_cf(url)
-        # Concat all dealer's short name
-        dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
+        dealerships = get_dealers_from_cf(url)
+        context['dealership_list'] = dealerships
         # Return a list of dealer short name
         return render(request, 'djangoapp/index.html', context)
 
