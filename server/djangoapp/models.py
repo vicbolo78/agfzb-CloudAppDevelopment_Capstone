@@ -39,7 +39,7 @@ class CarModel(models.Model):
     SUV = 'SUV'
     WAGON = 'Wagon'
     MINIVAN = 'Minivan'
-    CAR_TYPES = [
+    TYPES = [
         (SEDAN, 'Sedan'),
         (SUV, 'SUV'),
         (WAGON, 'Wagon'),
@@ -49,7 +49,7 @@ class CarModel(models.Model):
     type = models.CharField(
         null=False,
         max_length=50,
-        choices=CAR_TYPES,
+        choices=TYPES,
         default=SEDAN
     )
     make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
