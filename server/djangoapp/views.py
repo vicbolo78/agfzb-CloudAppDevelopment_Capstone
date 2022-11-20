@@ -97,7 +97,7 @@ def registration_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/car-reviews/Get%20Dealerships"
+        url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/get-dealership"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         context['dealership_list'] = dealerships
@@ -111,11 +111,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/car-reviews/Get%20Dealerships"
+        dealer_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/get-dealership"
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
-        review_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/car-reviews/Get%20Reviews"
+        review_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/get-review"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
@@ -129,7 +129,7 @@ def get_dealer_details(request, id):
 # ...
 def add_review(request, id):
     context = {}
-    dealer_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/car-reviews/Get%20Dealerships"
+    dealer_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/get-dealership"
     dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
@@ -158,6 +158,6 @@ def add_review(request, id):
             payload["car_year"] = int(car.year.strftime("%Y"))
             new_payload = {}
             new_payload["review"] = payload
-            review_post_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/car-reviews/Post%20Reviews"
+            review_post_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/post-review"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
