@@ -60,11 +60,7 @@
         {% endif %}
 
     <!--Add a dealer table here -->
-    <header>
-        <div>
-               <a href="{% url 'djangoapp:details'  dealer.name %}">Dealer Name</a>
-        </div>
-  </header>
+  
   <table class="table" id="table" data-filter-control="true">
         <thead>
             <tr>
@@ -80,17 +76,15 @@
         <tbody>
             {% for dealer in dealership_list %} 
                 <tr> <td>{{dealer.id}}</td> 
-                <td><a href="{% url 'djangoapp:details' dealer.name%}">{{dealer.full_name}}</a></td> 
+                <td><a href="{% url 'djangoapp:dealer_details' dealer.id%}">{{dealer.full_name}}</a></td> 
                 <td>{{dealer.city}}</td> 
                 <td>{{dealer.address}}</td> 
                 <td>{{dealer.zip}}</td> 
                 <td>{{dealer.st}}</td> 
             </tr> 
   {% endfor %} 
-  </tbody> 
-        </tbody>
+    </tbody>
     </table>
-
     </body>
     <script>
         $(function() {
