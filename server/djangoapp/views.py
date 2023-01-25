@@ -130,8 +130,11 @@ def add_review(request, id):
     dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
+        # Get cars for the dealer
         cars = CarModel.objects.all()
+        print(cars)
         context["cars"] = cars
+        
         return render(request, 'djangoapp/add_review.html', context)
     elif request.method == 'POST':
         if request.user.is_authenticated:
@@ -144,17 +147,18 @@ def add_review(request, id):
             payload["name"] = username
             payload["dealership"] = id
             payload["id"] = id
-            payload["review"] = request.POST["review"]
+            payload["review"] = request.POST["content"]
             payload["purchase"] = False
             if "purchasecheck" in request.POST:
                 if request.POST["purchasecheck"] == 'on':
                     payload["purchase"] = True
-            payload["purchase_date"] = request.POST["purchase_date"]
+            payload["purchase_date"] = request.POST["purchasedate"]
             payload["car_make"] = car.make.name
             payload["car_model"] = car.name
             payload["car_year"] = int(car.year.strftime("%Y"))
+
             new_payload = {}
             new_payload["review"] = payload
-            review_post_url = "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/post-review"
+            review_post_url =  "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/post-review"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
